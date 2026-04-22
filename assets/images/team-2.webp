@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" width="150" height="150">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0891B2"/>
+      <stop offset="100%" style="stop-color:#0E7490"/>
+    </linearGradient>
+  </defs>
+  <circle cx="75" cy="75" r="75" fill="url(#bg)"/>
+  <circle cx="75" cy="55" r="22" fill="rgba(255,255,255,0.3)"/>
+  <ellipse cx="75" cy="110" rx="35" ry="25" fill="rgba(255,255,255,0.3)"/>
+  <text x="75" y="142" text-anchor="middle" font-family="Inter" font-size="8" fill="rgba(255,255,255,0.5)">David Chen</text>
+</svg>

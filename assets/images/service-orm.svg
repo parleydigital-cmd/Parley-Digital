@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0891B2"/>
+      <stop offset="100%" style="stop-color:#0E7490"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg)"/>
+  <text x="300" y="180" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="24" fill="rgba(255,255,255,0.9)">Online Reputation</text>
+  <text x="300" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="rgba(255,255,255,0.6)">Placeholder — Replace with client image</text>
+</svg>
