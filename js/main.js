@@ -193,64 +193,87 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // Contact Form AJAX Submit (CON-001)
+    // EmailJS Form Submit Integration (CON-001)
     // ==========================================================================
-    const contactForm = document.getElementById('contactForm');
-    const formResponse = document.getElementById('formResponse');
+    const sendEmailJS = async (formElement, isStrategyForm = false) => {
+        const formData = new FormData(formElement);
+        const submitBtn = formElement.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerText;
+        
+        let formResponse = document.getElementById(isStrategyForm ? 'form-success' : 'formResponse');
+        
+        // Basic validation
+        if(!formElement.checkValidity()) {
+            formElement.reportValidity();
+            return;
+        }
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+        submitBtn.innerText = "Sending...";
+        submitBtn.disabled = true;
+
+        // Build template params
+        const templateParams = {};
+        for (let [key, value] of formData.entries()) {
+            templateParams[key] = value;
+        }
+        // Add form type identifier
+        templateParams.form_type = isStrategyForm ? "Strategy Audit Form" : "Contact Form";
+
+        const payload = {
+            service_id: 'service_r02jdjm',
+            template_id: 'template_qw4pm8b',
+            user_id: 'GwmRHNLeR7budPryZ',
+            template_params: templateParams
+        };
+
+        try {
+            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
             
-            // Client-side validation (basic)
-            const name = contactForm.querySelector('input[name="name"]').value;
-            const email = contactForm.querySelector('input[name="email"]').value;
-            
-            if (!name || !email) {
-                if (formResponse) {
-                    formResponse.innerText = "Please fill in required fields.";
-                    formResponse.style.color = "red";
-                }
-                return;
-            }
-
-            const formData = new FormData(contactForm);
-            const button = contactForm.querySelector('button[type="submit"]');
-            const originalText = button.innerText;
-            button.innerText = "Sending...";
-            button.disabled = true;
-
-            try {
-                // YOUR_FORM_ID to be replaced by client
-                const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
+            if (response.ok) {
+                if (isStrategyForm) {
+                    formElement.style.display = 'none';
+                    if (formResponse) formResponse.style.display = 'block';
+                } else {
                     if (formResponse) {
                         formResponse.innerText = "Thanks for reaching out! We'll be in touch soon.";
                         formResponse.style.color = "green";
                     }
-                    contactForm.reset();
-                } else {
-                    if (formResponse) {
-                        formResponse.innerText = "Oops! There was a problem submitting your form.";
-                        formResponse.style.color = "red";
-                    }
+                    formElement.reset();
                 }
-            } catch (error) {
-                if (formResponse) {
-                    formResponse.innerText = "Oops! Network error. Please try again later.";
-                    formResponse.style.color = "red";
-                }
-            } finally {
-                button.innerText = originalText;
-                button.disabled = false;
+            } else {
+                throw new Error("Failed to send");
             }
+        } catch (error) {
+            if (formResponse) {
+                formResponse.innerText = "Oops! Network error. Please try again later.";
+                formResponse.style.color = "red";
+                formResponse.style.display = 'block';
+            }
+        } finally {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+        }
+    };
+
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            sendEmailJS(contactForm, false);
+        });
+    }
+
+    const strategyForm = document.getElementById('strategy-form');
+    if (strategyForm) {
+        strategyForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            sendEmailJS(strategyForm, true);
         });
     }
 });

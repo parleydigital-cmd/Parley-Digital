@@ -80,6 +80,7 @@
         <div class="nav-links">
           <ul>
             <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="portfolio.html">Portfolio</a></li>
             <li><a href="contact.html">Contact Us</a></li>
@@ -356,18 +357,21 @@
             <h2 style="font-size: 2rem; margin: 10px 0;">Get your free growth audit — no pitch, no pressure</h2>
             <p style="color: var(--color-gray);">Tell us about your business and we'll reach out within 24 hours to schedule your 30-minute strategy session.</p>
           </div>
-          <form id="strategy-form" onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.style.display='none';">
+          <form id="strategy-form">
             <div style="margin-bottom: 20px;">
-              <input type="text" placeholder="Full Name" required style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem;">
+              <input type="text" name="name" placeholder="Full Name" required style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem;">
             </div>
             <div style="margin-bottom: 20px;">
-              <input type="email" placeholder="Business Email" required style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem;">
+              <input type="email" name="email" placeholder="Business Email" required style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem;">
             </div>
             <div style="margin-bottom: 20px;">
-              <input type="text" placeholder="Business Website (e.g., https://yourbusiness.com)" required style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem;">
+              <input type="tel" name="phone" placeholder="+1 (555) 000-0000" required style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem;">
             </div>
             <div style="margin-bottom: 20px;">
-              <select required style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; appearance: auto; background: white;">
+              <input type="text" name="website" placeholder="Business Website (e.g., https://yourbusiness.com)" required style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <select name="budget" required style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; appearance: auto; background: white;">
                 <option value="" disabled selected>Monthly Ad Budget</option>
                 <option value="Not running ads yet">Not running ads yet</option>
                 <option value="Under $1,000/mo">Under $1,000/mo</option>
@@ -426,6 +430,7 @@
           <h3>Quick Links</h3>
           <ul>
             <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="portfolio.html">Portfolio</a></li>
             <li><a href="contact.html">Contact Us</a></li>
